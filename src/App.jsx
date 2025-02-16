@@ -14,6 +14,8 @@ import ProductDetails from './Pages/ProductDetails/ProductDetails.jsx'
 import NotFound from './Pages/NotFound/NotFound.jsx'
 import { Offline } from 'react-detect-offline'
 import { RiWifiOffLine } from 'react-icons/ri'
+import CartContextProvider from './Context/CartContext.jsx'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
   const router = createBrowserRouter([
@@ -38,7 +40,7 @@ function App() {
         },
         {
           path: "cart", element: <ProtectedRouters>
-            <Cart />
+            <Cart/>
           </ProtectedRouters>
         },
         {
@@ -60,6 +62,7 @@ function App() {
   return (
     <>
       <TokenContextProvider>
+        <CartContextProvider>
         <CounterProvider>
         <Offline>
           <div className="offline fixed bottom-2 right-4 bg-green-100 p-3 font-semibold z-40">
@@ -73,11 +76,15 @@ function App() {
 
 
         </Offline>
+        <Toaster/>
 
 
 
         <RouterProvider router={router} />
       </CounterProvider>
+
+        </CartContextProvider>
+    
 
     </TokenContextProvider >
 
