@@ -1,11 +1,13 @@
 
 import axios from "axios"
 import styles from "./ProductDetails.module.css"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { FaStar } from "react-icons/fa"
 import Slider from "react-slick"
 import { Helmet } from "react-helmet"
+import { CartContext } from "../../Context/CartContext"
+import toast from "react-hot-toast"
 const settings = {
   dots: true,
   infinite: true,
@@ -18,6 +20,7 @@ const settings = {
 };
 
 export default function ProductDetails() {
+  const {addToCart} = useContext(CartContext)
   const { productId } = useParams()
   console.log(productId);
   const [details, setDetails] = useState({})
@@ -31,6 +34,30 @@ export default function ProductDetails() {
       .catch((error) => {
         console.log(error)
       })
+  }
+
+  async function addProduct(id){
+    let response = await addToCart(id)
+    console.log(response);
+    if(response.status === "success"){
+      toast.success(response.message,{
+        style:{
+          fontWeight:"700",
+          color:"black"
+          
+        }
+      })
+    }else{
+      toast.error("Failed To Add Product",{
+        style:{
+          fontWeight:"700",
+          color:"red"
+          
+        }
+      })
+
+    }
+    
   }
   useEffect(() => {
     getProductDetails()
@@ -70,7 +97,9 @@ export default function ProductDetails() {
               {details.ratingsAverage}</p>
 
           </div>
-          <button className="btn w-full"> + Add to cart</button>
+          <button onClick={() =>{
+            addProduct(details.id)
+          }} className="btn w-full"> + Add to cart</button>
           </div>
         </div>
       

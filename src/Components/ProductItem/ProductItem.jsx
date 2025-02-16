@@ -3,7 +3,7 @@ import { FaStar } from "react-icons/fa"
 import styles from "./ProductItem.module.css"
 import { Link } from "react-router-dom"
 
-export default function ProductItem({product}) {
+export default function ProductItem({product,addProduct}) {
   return (
     <div className="inner p-2 border border-transparent rounded-md">
       <Link to={`/ProductDetails/${product.id}`}>
@@ -20,7 +20,9 @@ export default function ProductItem({product}) {
 
               </div>
               </Link>
-              <button className="btn w-full"> Add to cart</button>
+              <button onClick={() =>{
+                addProduct(product.id)
+              }} className="btn w-full"> Add to cart</button>
 
             </div>
   )
