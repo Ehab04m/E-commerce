@@ -16,25 +16,49 @@ const settings = {
 };
 export default function MainSlider() {
   return (
-    <div className="row my-9">
-      <div className="w-3/4">
-      <Slider {...settings}>
-        <div>
-          <img className="w-full h-[500px]" src={img1} alt="" />
+    <div className="container mx-auto px-4 my-8">
+      <div className="flex flex-col lg:flex-row gap-4">
+        
+        <div className="w-full lg:w-3/4">
+          <Slider {...settings}>
+            <div>
+              <img
+                className="w-full h-[300px] lg:h-[500px] object-cover rounded-lg"
+                src={img1}
+                alt="Slide 1"
+              />
+            </div>
+            <div>
+              <img
+                className="w-full h-[300px] lg:h-[500px] object-cover rounded-lg"
+                src={img2}
+                alt="Slide 2"
+              />
+            </div>
+            <div>
+              <img
+                className="w-full h-[300px] lg:h-[500px] object-cover rounded-lg"
+                src={img3}
+                alt="Slide 3"
+              />
+            </div>
+          </Slider>
         </div>
-        <div>
-        <img className="w-full h-[500px]" src={img2} alt="" />
-        </div>
-        <div>
-        <img className="w-full h-[500px]" src={img3} alt="" />
-        </div>
-      </Slider>
-      </div>
-      <div className="w-1/4">
-      <img className="w-full h-[250px]" src={img2} alt="" />
-      <img className="w-full h-[250px]" src={img3} alt="" />
-      </div>
+
       
+        <div className="w-full lg:w-1/4 hidden lg:flex flex-col gap-4">
+          <img
+            className="w-full h-[250px] object-cover rounded-lg"
+            src={img2}
+            alt="Side Image 1"
+          />
+          <img
+            className="w-full h-[250px] object-cover rounded-lg"
+            src={img3}
+            alt="Side Image 2"
+          />
+        </div>
+      </div>
     </div>
-  )
+  );
 }

@@ -56,7 +56,7 @@ export default function CategorySlider() {
      setCategories(res.data.data)
     })
     .catch((err) => {
-      console.log(err)
+      
     })
   }
   useEffect(() => {
@@ -67,18 +67,39 @@ export default function CategorySlider() {
   }, [])
   
   return (
-    <div className=" my-8 mx-10">
-       <Slider {...settings}>
-      {categories.map((category) => (
-        <div key={category._id} >
-          <img className="w-full h-[300px]" src={category.image} alt={category.name} />
-          <h3 className="m-3 font-semibold">{category.name}</h3>
+    
+      <div className="container mx-auto px-4 my-20">
+        {/* Section Heading */}
+        <div className="text-center mb-10">
+          <h1 className="text-4xl font-extrabold text-gray-900 leading-tight tracking-tight mb-4">
+            Categories
+          </h1>
+          <div className="border-b-4 border-purple-500 w-24 mx-auto mb-2"></div>
+          <div className="border-b-2 border-purple-300 w-12 mx-auto"></div>
         </div>
-      ))}
-      
-    </Slider>
-
-    </div>
+  
+        {/* Categories Slider */}
+        <Slider {...settings}>
+          {categories.map((category) => (
+            <div key={category._id} className="px-2">
+              <div className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <img
+                  className="w-full h-[300px] object-cover transform group-hover:scale-105 transition-transform duration-300"
+                  src={category.image}
+                  alt={category.name}
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <h3 className="text-white text-2xl font-bold text-center">
+                    {category.name}
+                  </h3>
+                </div>
+              </div>
+            </div>
+          ))}
+        </Slider>
+      </div>
+    );
    
-  );
+  
 }
